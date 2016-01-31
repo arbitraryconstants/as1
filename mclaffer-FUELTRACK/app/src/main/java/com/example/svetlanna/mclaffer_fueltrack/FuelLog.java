@@ -13,6 +13,10 @@ public class FuelLog implements Serializable {
         log.add(fuelLogEntry);
     }
 
+    public void remove(int pos){
+        log.remove(pos);
+    }
+
     public ArrayList<FuelLogEntry> getLog() {
         return log;
     }

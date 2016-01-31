@@ -11,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -42,7 +44,7 @@ public class FuelLogActivity extends Activity implements Serializable {
     public ListView oldFuelLog; // Cannot show tweets directly so we need a method to convert to strings
 
     public ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
-    private ArrayAdapter<FuelLogEntry> adapter;
+    public ArrayAdapter<FuelLogEntry> adapter;
 
 
     @Override //onCreate only called once during the life of the activity
@@ -89,13 +91,40 @@ public class FuelLogActivity extends Activity implements Serializable {
         if (resultCode == Activity.RESULT_OK && requestCode == CODE) {
             FuelLogEntry newestEntry = (FuelLogEntry) data.getSerializableExtra("newestEntry");
             log.add(newestEntry);
+
+
+
             System.out.println("hello");
             System.out.println(newestEntry);
             saveInFile();
             adapter.notifyDataSetChanged();
+
+            // Setup remove listener method call
+            setupListViewListener();
+
+
         }
     }
 
+
+    // Attaches a long click listener to the listview
+    private void setupListViewListener() {
+        oldFuelLog.setOnItemLongClickListener(
+            new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapter,
+                                                   View item, int pos, long id) {
+                    // Remove the item within array at position
+                    log.remove(pos);
+                    // Refresh the adapter
+                    saveInFile(); // this calls adapter.notifyDataSetChanged();
+                    // Return true consumes the long click event (marks it handled)
+                    return true;
+                }
+
+            });
+
+    }
 
     @Override
     protected void onStart() {
@@ -135,6 +164,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
     private void saveInFile() {
         try {
+            adapter.notifyDataSetChanged();
             FileOutputStream fos = openFileOutput(FILENAME,
                     0); // This file can be accessed by this application only, file will be filled with new stuff
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
