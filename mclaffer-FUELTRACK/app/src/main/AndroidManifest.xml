@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FuelLog"
+            android:name=".FuelLogActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,15 +19,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FuelLogEntry"
+            android:name=".FuelLogEntryActivity"
             android:label="@string/title_activity_log_view"
-            android:parentActivityName=".FuelLog"
+            android:parentActivityName=".FuelLogActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FuelLog" />
+                android:value=".FuelLogActivity" />
         </activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 
