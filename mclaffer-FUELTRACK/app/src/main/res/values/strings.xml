@@ -7,7 +7,14 @@
     <string name="hello">Joshua said:</string>
     <string name="save">Save</string>
     <string name="clear">Clear</string>
-    <string name="date">Enter date in yyyy-mm-dd format </string>
     <string name="edit_button">Edit</string>
+    <string name="delete_button">Edit</string>
+
+    <string name="date">Date (yyyy-mm-dd) </string>
+    <string name="station">Station </string>
+    <string name="odometer_reading">Odometer reading </string>
+    <string name="fuel_grade">Fuel grade </string>
+    <string name="fuel_amount">Fuel amount </string>
+    <string name="fuel_unit_cost">Fuel unit cost </string>
 
 </resources>

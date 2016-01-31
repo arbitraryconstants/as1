@@ -17,6 +17,10 @@ public class FuelLog implements Serializable {
         log.remove(pos);
     }
 
+    public void removeEntry(FuelLogEntry fuelLogEntry){
+        log.remove(fuelLogEntry);
+    }
+
     public ArrayList<FuelLogEntry> getLog() {
         return log;
     }

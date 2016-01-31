@@ -21,35 +21,40 @@
         android:id="@+id/station"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal" />
+        android:scrollbars="horizontal"
+        android:hint="@string/station"/>
 
     <EditText
         android:id="@+id/odometer_reading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:hint="@string/odometer_reading"/>
 
     <EditText
         android:id="@+id/fuel_grade"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:hint="@string/fuel_grade"/>
 
     <EditText
         android:id="@+id/fuel_amount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:hint="@string/fuel_amount"/>
 
     <EditText
         android:id="@+id/fuel_unit_cost"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:hint="@string/fuel_unit_cost"/>
 
 
     <Button

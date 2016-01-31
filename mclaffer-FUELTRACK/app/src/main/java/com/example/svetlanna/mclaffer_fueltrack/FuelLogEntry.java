@@ -40,17 +40,37 @@ public class FuelLogEntry implements Serializable {
         return fuel_cost.toString();
     }
 
-    public String getDate() {
-        return date;
-    }
 
     @Override
     public String toString(){
-        return "date: " + date + "\n" + "station: " + station;
+        return "Date: " + this.date + "\n" + "Station: " + this.station + "\n" +
+                "Odometer reading: " + this.odometer_reading + "\n" + "Fuel grade: " + this.fuel_grade + "\n" +
+                "Fuel amount: " + this.fuel_amount + "\n" + "Fuel unit cost: " + this.fuel_unit_cost + "\n" +
+                "Fuel_cost: " + this.fuel_cost;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
     public String getStation() {
         return this.station;
+    }
+
+    public String getOdometer_reading() {
+        return this.odometer_reading;
+    }
+
+    public String getFuel_grade() {
+        return this.fuel_grade;
+    }
+
+    public String getFuel_amount() {
+        return this.fuel_amount;
+    }
+
+    public String getFuel_unit_cost() {
+        return this.fuel_unit_cost;
     }
 
 }

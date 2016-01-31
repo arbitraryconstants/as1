@@ -49,12 +49,13 @@ public class FuelLogActivity extends Activity implements Serializable {
 
     @Override //onCreate only called once during the life of the activity
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_fuel_log);
 
-        //Button sendButton = (Button) findViewById(R.id.button_send);
         Button clearButton = (Button) findViewById(R.id.clear);
         oldFuelLog = (ListView) findViewById(R.id.oldFuelLog);
+        setupListViewListener();
 
         // Called when user clicks clear button
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +69,8 @@ public class FuelLogActivity extends Activity implements Serializable {
 
             }
         });
+
+
     }
 
     /**
@@ -80,11 +83,9 @@ public class FuelLogActivity extends Activity implements Serializable {
         // Do something in response to button
         Intent intent = new Intent(this, FuelLogEntryActivity.class);
         startActivityForResult(intent, CODE);
-
-
     }
 
-    @Override
+        @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         System.out.println("hello!!!!!!!");
         // If the request went well (OK) and the request was PICK_CONTACT_REQUEST
@@ -92,22 +93,17 @@ public class FuelLogActivity extends Activity implements Serializable {
             FuelLogEntry newestEntry = (FuelLogEntry) data.getSerializableExtra("newestEntry");
             log.add(newestEntry);
 
-
-
-            System.out.println("hello");
             System.out.println(newestEntry);
             saveInFile();
             adapter.notifyDataSetChanged();
-
-            // Setup remove listener method call
-            setupListViewListener();
-
 
         }
     }
 
 
     // Attaches a long click listener to the listview
+    // Edit fuel log entry
+    // When a fuel log entry is long clicked
     private void setupListViewListener() {
         oldFuelLog.setOnItemLongClickListener(
             new AdapterView.OnItemLongClickListener() {
@@ -115,9 +111,13 @@ public class FuelLogActivity extends Activity implements Serializable {
                 public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
                     // Remove the item within array at position
+                    System.out.println("hello removing");
                     log.remove(pos);
                     // Refresh the adapter
                     saveInFile(); // this calls adapter.notifyDataSetChanged();
+
+                    createLogEntry(item);
+
                     // Return true consumes the long click event (marks it handled)
                     return true;
                 }
@@ -134,6 +134,9 @@ public class FuelLogActivity extends Activity implements Serializable {
 
         adapter = new ArrayAdapter<FuelLogEntry>(FuelLogActivity.this,
                 R.layout.log_item, log);
+
+        //adapter = new ArrayAdapter<FuelLogEntry>(FuelLogActivity.this,
+        //        R.layout.log_item, R.id.FuelEntry, log);
         oldFuelLog.setAdapter(adapter);
 
         ///adapter.notifyDataSetChanged();
