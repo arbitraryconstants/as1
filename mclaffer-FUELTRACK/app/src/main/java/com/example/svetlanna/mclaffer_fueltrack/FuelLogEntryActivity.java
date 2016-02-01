@@ -17,13 +17,13 @@ import java.io.Serializable;
  * fuel amount, fuel unit cost
  *
  * Design rational: Is called by FuelLogActivity when user
- * hits "Create New Log Entry" button or the user clicks a fuel log
+ * hits "Create New Log Entry" button or the user long clicks a fuel log
  * entry in the list view. Implements Serializable so that information
  * can be passed between activities using the intent method .putExtra
  *
  * Outstanding Issues: Input validation for date, and input validation
  * for ensuring that the correct number of decimal places are entered
- * by the user
+ * by the user.
  */
 public class FuelLogEntryActivity extends Activity implements Serializable {
 
@@ -34,10 +34,8 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
     private EditText fuel_amount;
     private EditText fuel_unit_cost;
 
-    // Used as a flag to determine whether entry is new or to be edited
-    private String flag = "edit";
+    private String flag = "edit"; // Used as a flag to determine whether entry is new or to be edited
 
-    // Only called once per activity lifetime
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +56,7 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
         // If intentRcvEdit was not received then date_str will be null
         // If date_str is null, then we know that the entry is a new entry
         if (date_str == null) {
-            // Update flag
-            flag = "new";
+            flag = "new";   // Update flag
         }
 
         // Set EditText boxes to display previous information if it exists
@@ -131,14 +128,9 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
                     Intent intentPassEntry = new Intent(FuelLogEntryActivity.this, FuelLogActivity.class);
                     intentPassEntry.putExtra("newestEntry", newestEntry);
                     setResult(Activity.RESULT_OK, intentPassEntry);
-
                 }
-
                 finish();
-
             }
         });
-
-
     }
 }

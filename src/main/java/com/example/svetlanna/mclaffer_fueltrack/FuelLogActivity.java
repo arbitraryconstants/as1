@@ -24,54 +24,44 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
-
 /**
  * Purpose: Display Fuel log and allow user to interact with the log
  * through pressing buttons/log entry.
  *
  * Design rational: Implements Serializable so that information
  * can be passed between activities using the intent method .putExtra
+ * ListView of log is updated here as log is updated.
  *
- * Outstanding Issues: None
+ * Outstanding Issues: Would ideally create new FuelLog, rather
+ * than new ArraryList<FuelLogEntry>, for log. That way custom
+ * methods could be implemented for log.
  */
 public class FuelLogActivity extends Activity implements Serializable {
 
-    // Name of file used for saving fuel log
-    private static final String FILENAME = "file.sav";
-    // New ListView for log
-    private ListView oldFuelLog;
-    // Create fuel log
-    //private FuelLog log= new FuelLog();
-    private ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
-    // Adapter used for displaying the ListView items
-    private ArrayAdapter<FuelLogEntry> adapter;
+    private static final String FILENAME = "file.sav";  // Name of file used for saving fuel log
+    private ListView oldFuelLog; // New ListView for log
+    private ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>(); // Create fuel log
+    //private FuelLog log= new FuelLog(); // More OO solution -- had issues implementing
+    private ArrayAdapter<FuelLogEntry> adapter; // Adapter used for displaying the ListView items
+    TextView addResult; // Text displayed when user presses "Calculate Total Fuel Cost" button
+    FuelLogEntry entry; // Used to save old entry so that it can be edited
+    private int CODE = 1; // Code for intent
 
-    // Text displayed when user presses "Calculate Total Fuel Cost" button
-    TextView addResult;
-
-    // Used to save old entry so that it can be edited
-    FuelLogEntry entry;
-
-    // Code for intent
-    public int CODE = 1;
-
-    // Only called once per activity lifetime
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_fuel_log);
 
-        // Load total fuel cost if result already exists
-        addResult = (TextView)findViewById(R.id.txtResult);
+        addResult = (TextView)findViewById(R.id.txtResult); // Load total fuel cost if result already exists
 
+        // "Calculate Total Fuel Cost" and "Clear" buttons
         Button sumButton = (Button) findViewById(R.id.sum);
         Button clearButton = (Button) findViewById(R.id.clear);
 
         oldFuelLog = (ListView) findViewById(R.id.oldFuelLog);
 
-        setupListViewListener();
+        setupListViewListener(); // For fuel log entry in list view
 
         // Called when user clicks clear button
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +70,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
                 setResult(RESULT_OK);
                 log.clear(); // Remove all fuel log entries from log
-                //log.clearLog();
+                //log.clearLog(); // // More OO solution
                 adapter.notifyDataSetChanged(); // Update adapter
                 saveInFile(); // Update file.save
 
@@ -93,7 +83,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
             public void onClick(View v) {
 
-                double sum_dbl = 0.00;
+                double sum_dbl = 0.00; // Initialize
                 setResult(RESULT_OK);
 
                 for (FuelLogEntry entry : log) {
@@ -119,6 +109,7 @@ public class FuelLogActivity extends Activity implements Serializable {
     public void editLogEntry(View view )  {
 
         Intent intentEdit = new Intent(this, FuelLogEntryActivity.class);
+        // Pass information about entry to edit
         intentEdit.putExtra("date", entry.getDate());
         intentEdit.putExtra("station", entry.getStation());
         intentEdit.putExtra("odometer_reading", entry.getOdometer_reading());
@@ -146,16 +137,14 @@ public class FuelLogActivity extends Activity implements Serializable {
         if (resultCode == Activity.RESULT_OK && requestCode == CODE) {
             FuelLogEntry newestEntry = (FuelLogEntry) data.getSerializableExtra("newestEntry");
             log.add(newestEntry); // Append new entry to log
+            //log.addEntry(newestEntry) // More OO solution
             saveInFile(); // Update file.save
             adapter.notifyDataSetChanged(); // Update adapter
 
         }
     }
 
-
-    // Attaches a long click listener to the listview
-    // Edit fuel log entry
-    // Called When a fuel log entry is long clicked
+    // Called When a fuel log entry is long clicked ie. user wants to edit this entry
     // Code inspired by: https://guides.codepath.com/android/Basic-Todo-App-Tutorial
     private void setupListViewListener() {
         oldFuelLog.setOnItemLongClickListener(
@@ -166,13 +155,12 @@ public class FuelLogActivity extends Activity implements Serializable {
 
                     entry = log.get(pos); // Get current entry to use later for editing
                     log.remove(pos); // Remove current entry from list
+                    //log.removeEntry // More OO solution
                     saveInFile(); // Update file.save
                     editLogEntry(item); // Call to edit entry
                     return true;
                 }
-
             });
-
     }
 
     // Code from https://github.com/joshua2ua/lonelyTwitter
@@ -184,7 +172,6 @@ public class FuelLogActivity extends Activity implements Serializable {
         adapter = new ArrayAdapter<FuelLogEntry>(FuelLogActivity.this,
                 R.layout.log_item, log);
         oldFuelLog.setAdapter(adapter);
-
     }
 
     // Code from https://github.com/joshua2ua/lonelyTwitter
@@ -206,8 +193,6 @@ public class FuelLogActivity extends Activity implements Serializable {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
-
-
     }
 
     // Code from https://github.com/joshua2ua/lonelyTwitter

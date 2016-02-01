@@ -13,7 +13,7 @@ import java.math.MathContext;
  * hits "save" button. Implements Serializable so that information
  * can be passed between activities using the intent method .putExtra
  *
- * Outstanding Issues: None
+ * Outstanding Issues: save fuel cost to correct # of decimal places
  */
 public class FuelLogEntry implements Serializable {
 

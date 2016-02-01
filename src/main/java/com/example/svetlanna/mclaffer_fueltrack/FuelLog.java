@@ -10,14 +10,14 @@ import java.util.ArrayList;
  * Design rational: Implements Serializable so that information
  * can be passed between activities using the intent method .putExtra
  *
- * Outstanding Issues: Does not have exception handling. Is only used for
+ * Outstanding Issues: Does not have exception handling. To be used for
  * testing. I was not able to use this code from FuelLogActivity
  * because I needed to be able to iterate through the entries in
  * this object when calculating the total fuel cost of the log.
  */
 public class FuelLog implements Serializable {
 
-    public ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
+    private ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
 
     public void addEntry(FuelLogEntry fuelLogEntry){
         log.add(fuelLogEntry);
