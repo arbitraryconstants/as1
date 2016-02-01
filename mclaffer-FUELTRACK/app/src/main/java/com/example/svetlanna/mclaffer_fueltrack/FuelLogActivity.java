@@ -48,6 +48,8 @@ public class FuelLogActivity extends Activity implements Serializable {
 
     TextView addResult;
 
+    FuelLogEntry entry;
+
     @Override //onCreate only called once during the life of the activity
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -99,20 +101,34 @@ public class FuelLogActivity extends Activity implements Serializable {
 
 
     }
+    public int CODE = 1;
+
+    public void editLogEntry(View view )  {
+
+
+        Intent intentEdit = new Intent(this, FuelLogEntryActivity.class);
+        intentEdit.putExtra("date", entry.getDate());
+        intentEdit.putExtra("station", entry.getStation());
+        intentEdit.putExtra("odometer_reading", entry.getOdometer_reading());
+        intentEdit.putExtra("fuel_grade", entry.getFuel_grade());
+        intentEdit.putExtra("fuel_amount", entry.getFuel_amount());
+        intentEdit.putExtra("fuel_unit_cost", entry.getFuel_unit_cost());
+        //startActivity(intentEdit);
+        startActivityForResult(intentEdit, CODE);
+
+    }
 
     /**
      * Called when the user clicks the Create Log Entry button
      */
 
-    public int CODE = 1;
+
 
     public void createLogEntry(View view) {
         //System.out.println(view);
         Intent intent = new Intent(this, FuelLogEntryActivity.class);
         startActivityForResult(intent, CODE);
     }
-
-
 
         @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -142,13 +158,14 @@ public class FuelLogActivity extends Activity implements Serializable {
                     // Remove the item within array at position
                     System.out.println("hello removing");
 
-                    FuelLogEntry entry = log.get(pos);
+                    entry = log.get(pos);
                     log.remove(pos);
                     // Refresh the adapter
                     saveInFile(); // this calls adapter.notifyDataSetChanged();
 
                     System.out.println(entry);
-                    createLogEntry( item);
+                    //createLogEntry( item);
+                    editLogEntry(item);
 
                     // Return true consumes the long click event (marks it handled)
                     return true;
@@ -167,8 +184,6 @@ public class FuelLogActivity extends Activity implements Serializable {
         adapter = new ArrayAdapter<FuelLogEntry>(FuelLogActivity.this,
                 R.layout.log_item, log);
 
-        //adapter = new ArrayAdapter<FuelLogEntry>(FuelLogActivity.this,
-        //        R.layout.log_item, R.id.FuelEntry, log);
         oldFuelLog.setAdapter(adapter);
 
         ///adapter.notifyDataSetChanged();
