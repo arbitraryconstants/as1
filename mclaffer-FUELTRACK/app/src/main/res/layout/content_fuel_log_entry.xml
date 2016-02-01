@@ -37,7 +37,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
-        android:inputType="numberDecimal"
         android:hint="@string/fuel_grade"/>
 
     <EditText
@@ -62,5 +61,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/save" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
 
 </LinearLayout>

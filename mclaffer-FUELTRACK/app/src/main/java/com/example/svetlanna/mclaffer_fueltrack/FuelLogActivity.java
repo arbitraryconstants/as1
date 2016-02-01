@@ -33,6 +33,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -82,7 +84,7 @@ public class FuelLogActivity extends Activity implements Serializable {
         sumButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                double sum_dbl = 0;
+                double sum_dbl = 0.00;
                 setResult(RESULT_OK);
 
                 for (FuelLogEntry entry : log) {
@@ -91,7 +93,9 @@ public class FuelLogActivity extends Activity implements Serializable {
                     sum_dbl += fuel_cost_dbl ;
                 }
 
-                addResult.setText(Double.toString(sum_dbl));
+                String sum_str = Double.toString(sum_dbl);
+                BigDecimal sum = new BigDecimal(sum_str);
+                addResult.setText(sum.toString());
 
                 adapter.notifyDataSetChanged();
                 saveInFile(); // Save the empty list to FILENAME
@@ -132,7 +136,6 @@ public class FuelLogActivity extends Activity implements Serializable {
 
         @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("hello!!!!!!!");
         // If the request went well (OK) and the request was PICK_CONTACT_REQUEST
         if (resultCode == Activity.RESULT_OK && requestCode == CODE) {
             FuelLogEntry newestEntry = (FuelLogEntry) data.getSerializableExtra("newestEntry");
@@ -163,8 +166,6 @@ public class FuelLogActivity extends Activity implements Serializable {
                     // Refresh the adapter
                     saveInFile(); // this calls adapter.notifyDataSetChanged();
 
-                    System.out.println(entry);
-                    //createLogEntry( item);
                     editLogEntry(item);
 
                     // Return true consumes the long click event (marks it handled)

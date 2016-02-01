@@ -6,6 +6,7 @@
     <string name="title_activity_log_view">Log Entry</string>
     <string name="hello">Joshua said:</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="edit_button">Edit</string>
     <string name="delete_button">Edit</string>
@@ -16,7 +17,7 @@
     <string name="station">Station </string>
     <string name="odometer_reading">Odometer reading </string>
     <string name="fuel_grade">Fuel grade </string>
-    <string name="fuel_amount">Fuel amount </string>
-    <string name="fuel_unit_cost">Fuel unit cost </string>
+    <string name="fuel_amount">Fuel amount (L)</string>
+    <string name="fuel_unit_cost">Fuel unit cost (cents/L)</string>
 
 </resources>
