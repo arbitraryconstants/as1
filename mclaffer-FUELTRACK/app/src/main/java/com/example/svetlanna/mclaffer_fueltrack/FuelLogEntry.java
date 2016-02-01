@@ -43,6 +43,7 @@ public class FuelLogEntry implements Serializable {
         BigDecimal fuel_amount_num = new BigDecimal(fuel_amount);
         BigDecimal fuel_unit_cost_num = new BigDecimal(fuel_unit_cost);
         MathContext mc = new MathContext(4); // 4 precision
+        // Multiple BigDecimal: http://www.tutorialspoint.com/java/math/bigdecimal_multiply_mc.htm
         BigDecimal fuel_cost = fuel_amount_num.multiply(fuel_unit_cost_num, mc);
 
         fuel_cost = fuel_cost.divide(cents_to_dollars, mc);

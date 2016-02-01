@@ -43,7 +43,7 @@ public class FuelLogActivity extends Activity implements Serializable {
     public ListView oldFuelLog;
     // Create fuel log
     public ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
-    // Adapter for keeping track of changes
+    // Adapter used for displaying the ListView items
     public ArrayAdapter<FuelLogEntry> adapter;
 
     // Text displayed when user presses "Calculate Total Fuel Cost" button
@@ -86,6 +86,7 @@ public class FuelLogActivity extends Activity implements Serializable {
         });
 
         // Called when user clicks "Calculate Total Fuel Cost" button
+        // addResult.setText() idea from: http://codehandbook.org/a-simple-android-application-for-adding-two-numbers/
         sumButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -101,6 +102,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
                 String sum_str = Double.toString(sum_dbl);
                 BigDecimal sum = new BigDecimal(sum_str);
+                // Convert BigDecimal to string: https://stackoverflow.com/questions/13900204/bigdecimal-to-string
                 addResult.setText("Total fuel cost: " + sum.toString() + " dollars");
                 adapter.notifyDataSetChanged(); // Update adapter
                 saveInFile(); // Update file.save
@@ -133,6 +135,8 @@ public class FuelLogActivity extends Activity implements Serializable {
     }
 
     // Result returned from starting intent for editing/creating new log entry
+    // Idea for onActivityResult from :https://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+    // And from: http://www.101apps.co.za/index.php/articles/passing-objects-between-activities.html
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -150,6 +154,7 @@ public class FuelLogActivity extends Activity implements Serializable {
     // Attaches a long click listener to the listview
     // Edit fuel log entry
     // Called When a fuel log entry is long clicked
+    // Code inspired by: https://guides.codepath.com/android/Basic-Todo-App-Tutorial
     private void setupListViewListener() {
         oldFuelLog.setOnItemLongClickListener(
             new AdapterView.OnItemLongClickListener() {

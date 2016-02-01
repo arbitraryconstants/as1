@@ -64,6 +64,7 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
         }
 
         // Set EditText boxes to display previous information if it exists
+        // Idea from: https://stackoverflow.com/questions/4590957/how-to-set-text-in-an-edittext
         date = (EditText)findViewById(R.id.date);
         date.setText(date_str, TextView.BufferType.EDITABLE);
         station = (EditText)findViewById(R.id.station);
@@ -98,6 +99,7 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
                 FuelLogEntry newestEntry = new FuelLogEntry(date_text, station_text, odometer_reading_text, fuel_grade_text, fuel_amount_text, fuel_unit_cost_text);
 
                 // Pass this new entry back to the FuelLogActivity so that it can be added to the log list
+                // use "FuelLogEntryActivity.this" instead of "this". Source: https://stackoverflow.com/questions/5257003/how-to-start-second-activity-in-android-getting-error
                 Intent intentPassEntry = new Intent (FuelLogEntryActivity.this, FuelLogActivity.class);
                 intentPassEntry.putExtra("newestEntry",newestEntry);
                 setResult(Activity.RESULT_OK, intentPassEntry);
