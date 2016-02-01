@@ -95,7 +95,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
                 String sum_str = Double.toString(sum_dbl);
                 BigDecimal sum = new BigDecimal(sum_str);
-                addResult.setText(sum.toString());
+                addResult.setText("Total fuel cost: " + sum.toString() + " dollars");
 
                 adapter.notifyDataSetChanged();
                 saveInFile(); // Save the empty list to FILENAME

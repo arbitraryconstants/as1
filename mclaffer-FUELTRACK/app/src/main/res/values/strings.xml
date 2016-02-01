@@ -7,10 +7,10 @@
     <string name="hello">Joshua said:</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="clear">Clear</string>
+    <string name="clear">Clear All Entries</string>
     <string name="edit_button">Edit</string>
     <string name="delete_button">Edit</string>
-    <string name="sum">Calculate Total Fuel cost</string>
+    <string name="sum">Calculate Total Fuel Cost</string>
 
 
     <string name="date">Date (yyyy-mm-dd) </string>

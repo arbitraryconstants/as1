@@ -3,7 +3,6 @@ package com.example.svetlanna.mclaffer_fueltrack;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Date;
 
 /**
  * Created by svetlanna on 16-01-30.
@@ -47,7 +46,7 @@ public class FuelLogEntry implements Serializable {
         return "Date: " + this.date + "\n" + "Station: " + this.station + "\n" +
                 "Odometer reading: " + this.odometer_reading + " km" + "\n" + "Fuel grade: " + this.fuel_grade + "\n" +
                 "Fuel amount: " + this.fuel_amount + " L"+  "\n" + "Fuel unit cost: " + this.fuel_unit_cost +
-                " cents per L" + "\n" + "Fuel_cost: " + this.fuel_cost + " dollars";
+                " cents per L" + "\n" + "Fuel cost: " + this.fuel_cost + " dollars";
     }
 
     public String getDate() {
@@ -74,8 +73,5 @@ public class FuelLogEntry implements Serializable {
         return this.fuel_unit_cost;
     }
 
-    public String getFuel_cost() {
-        return this.fuel_cost;
-    }
 
 }
