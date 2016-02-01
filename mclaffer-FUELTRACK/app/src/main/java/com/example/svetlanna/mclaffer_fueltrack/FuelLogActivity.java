@@ -46,12 +46,18 @@ public class FuelLogActivity extends Activity implements Serializable {
     public ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
     public ArrayAdapter<FuelLogEntry> adapter;
 
+    TextView addResult;
 
     @Override //onCreate only called once during the life of the activity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_fuel_log);
+
+        // Add up total fuel cost
+        addResult = (TextView)findViewById(R.id.txtResult);
+        Button sumButton = (Button) findViewById(R.id.sum);
+
 
         Button clearButton = (Button) findViewById(R.id.clear);
         oldFuelLog = (ListView) findViewById(R.id.oldFuelLog);
@@ -70,6 +76,27 @@ public class FuelLogActivity extends Activity implements Serializable {
             }
         });
 
+        // Called when user clicks sum button
+        sumButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                double sum_dbl = 0;
+                setResult(RESULT_OK);
+
+                for (FuelLogEntry entry : log) {
+                    String fuel_cost_str = entry.fuel_cost;
+                    Double fuel_cost_dbl = Double.parseDouble(fuel_cost_str);
+                    sum_dbl += fuel_cost_dbl ;
+                }
+
+                addResult.setText(Double.toString(sum_dbl));
+
+                adapter.notifyDataSetChanged();
+                saveInFile(); // Save the empty list to FILENAME
+
+            }
+        });
+
 
     }
 
@@ -80,10 +107,12 @@ public class FuelLogActivity extends Activity implements Serializable {
     public int CODE = 1;
 
     public void createLogEntry(View view) {
-        // Do something in response to button
+        //System.out.println(view);
         Intent intent = new Intent(this, FuelLogEntryActivity.class);
         startActivityForResult(intent, CODE);
     }
+
+
 
         @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -93,7 +122,7 @@ public class FuelLogActivity extends Activity implements Serializable {
             FuelLogEntry newestEntry = (FuelLogEntry) data.getSerializableExtra("newestEntry");
             log.add(newestEntry);
 
-            System.out.println(newestEntry);
+            //System.out.println(newestEntry);
             saveInFile();
             adapter.notifyDataSetChanged();
 
@@ -112,11 +141,14 @@ public class FuelLogActivity extends Activity implements Serializable {
                                                    View item, int pos, long id) {
                     // Remove the item within array at position
                     System.out.println("hello removing");
+
+                    FuelLogEntry entry = log.get(pos);
                     log.remove(pos);
                     // Refresh the adapter
                     saveInFile(); // this calls adapter.notifyDataSetChanged();
 
-                    createLogEntry(item);
+                    System.out.println(entry);
+                    createLogEntry( item);
 
                     // Return true consumes the long click event (marks it handled)
                     return true;

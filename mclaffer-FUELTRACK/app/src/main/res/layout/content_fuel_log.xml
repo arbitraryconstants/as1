@@ -27,6 +27,18 @@ android:orientation="vertical" >
     android:text="@string/clear" />
 
 <Button
+    android:id="@+id/sum"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/sum" />
+
+<TextView
+    android:id="@+id/txtResult"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<Button
     android:id="@+id/button_send"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"

@@ -30,13 +30,14 @@ public class FuelLogEntry implements Serializable {
     }
 
     public String getFuelCost(String fuel_amount, String fuel_unit_cost){
-
+        BigDecimal cents_to_dollars = new BigDecimal("100.00");
 
         BigDecimal fuel_amount_num = new BigDecimal(fuel_amount);
         BigDecimal fuel_unit_cost_num = new BigDecimal(fuel_unit_cost);
         MathContext mc = new MathContext(4); // 4 precision
         BigDecimal fuel_cost = fuel_amount_num.multiply(fuel_unit_cost_num, mc);
 
+        fuel_cost = fuel_cost.divide(cents_to_dollars, mc);
         return fuel_cost.toString();
     }
 
@@ -44,9 +45,9 @@ public class FuelLogEntry implements Serializable {
     @Override
     public String toString(){
         return "Date: " + this.date + "\n" + "Station: " + this.station + "\n" +
-                "Odometer reading: " + this.odometer_reading + "\n" + "Fuel grade: " + this.fuel_grade + "\n" +
-                "Fuel amount: " + this.fuel_amount + "\n" + "Fuel unit cost: " + this.fuel_unit_cost + "\n" +
-                "Fuel_cost: " + this.fuel_cost;
+                "Odometer reading: " + this.odometer_reading + " km" + "\n" + "Fuel grade: " + this.fuel_grade + "\n" +
+                "Fuel amount: " + this.fuel_amount + " L"+  "\n" + "Fuel unit cost: " + this.fuel_unit_cost +
+                " cents per L" + "\n" + "Fuel_cost: " + this.fuel_cost + " dollars";
     }
 
     public String getDate() {
@@ -71,6 +72,10 @@ public class FuelLogEntry implements Serializable {
 
     public String getFuel_unit_cost() {
         return this.fuel_unit_cost;
+    }
+
+    public String getFuel_cost() {
+        return this.fuel_cost;
     }
 
 }

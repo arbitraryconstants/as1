@@ -33,17 +33,23 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
         setContentView(R.layout.content_fuel_log_entry);
 
         /// Do this if these are null.
-        date = (EditText) findViewById(R.id.date);
-        station = (EditText) findViewById(R.id.station);
-        //if( station.getText().toString().length() == 0 )
-        //    station.setError( "First name is required!" );
+        if (date == null) {
+            date = (EditText) findViewById(R.id.date);
+            station = (EditText) findViewById(R.id.station);
+            //if( station.getText().toString().length() == 0 )
+            //    station.setError( "First name is required!" );
 
-        odometer_reading = (EditText)findViewById(R.id.odometer_reading);
-        fuel_grade = (EditText) findViewById(R.id.fuel_grade);
-        fuel_amount = (EditText) findViewById(R.id.fuel_amount);
-        fuel_unit_cost = (EditText) findViewById(R.id.fuel_unit_cost);
+            odometer_reading = (EditText) findViewById(R.id.odometer_reading);
+            fuel_grade = (EditText) findViewById(R.id.fuel_grade);
+            fuel_amount = (EditText) findViewById(R.id.fuel_amount);
+            fuel_unit_cost = (EditText) findViewById(R.id.fuel_unit_cost);
+        }
 
         ///Otherwise call gettters?
+        //else {
+            // Get stuff.
+        //}
+
 
 
         Button saveButton = (Button) findViewById(R.id.save);

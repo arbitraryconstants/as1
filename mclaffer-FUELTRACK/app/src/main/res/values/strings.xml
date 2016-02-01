@@ -9,6 +9,8 @@
     <string name="clear">Clear</string>
     <string name="edit_button">Edit</string>
     <string name="delete_button">Edit</string>
+    <string name="sum">Calculate Total Fuel cost</string>
+
 
     <string name="date">Date (yyyy-mm-dd) </string>
     <string name="station">Station </string>
