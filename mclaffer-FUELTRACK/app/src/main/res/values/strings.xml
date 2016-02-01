@@ -4,7 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="button_send">Create New Log Entry</string>
     <string name="title_activity_log_view">Log Entry</string>
-    <string name="hello">Joshua said:</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear All Entries</string>

@@ -5,7 +5,15 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 /**
- * Created by svetlanna on 16-01-30.
+ * Purpose: Compose a fuel log entry with the following attributes:
+ * date, station, odometer reading, fuel grade, fuel amount,
+ * fuel unit cost, fuel cost
+ *
+ * Design rational: Is called by FuelLogEntryActivity when user
+ * hits "save" button. Implements Serializable so that information
+ * can be passed between activities using the intent method .putExtra
+ *
+ * Outstanding Issues: None
  */
 public class FuelLogEntry implements Serializable {
 
@@ -28,6 +36,7 @@ public class FuelLogEntry implements Serializable {
         this.fuel_cost = getFuelCost(fuel_amount, fuel_unit_cost); // 2 decimal places
     }
 
+    // Method to calculate fuel cost
     public String getFuelCost(String fuel_amount, String fuel_unit_cost){
         BigDecimal cents_to_dollars = new BigDecimal("100.00");
 
@@ -40,7 +49,7 @@ public class FuelLogEntry implements Serializable {
         return fuel_cost.toString();
     }
 
-
+    // Method to allow for pretty printing
     @Override
     public String toString(){
         return "Date: " + this.date + "\n" + "Station: " + this.station + "\n" +
@@ -49,29 +58,34 @@ public class FuelLogEntry implements Serializable {
                 " cents per L" + "\n" + "Fuel cost: " + this.fuel_cost + " dollars";
     }
 
+    // date getter
     public String getDate() {
         return this.date;
     }
 
+    // station getter
     public String getStation() {
         return this.station;
     }
 
+    // odometer getter
     public String getOdometer_reading() {
         return this.odometer_reading;
     }
 
+    // fuel grade getter
     public String getFuel_grade() {
         return this.fuel_grade;
     }
 
+    // fuel amount getter
     public String getFuel_amount() {
         return this.fuel_amount;
     }
 
+    // fuel unit cost getter
     public String getFuel_unit_cost() {
         return this.fuel_unit_cost;
     }
-
 
 }
