@@ -38,13 +38,14 @@ import com.google.gson.reflect.TypeToken;
 public class FuelLogActivity extends Activity implements Serializable {
 
     // Name of file used for saving fuel log
-    public static final String FILENAME = "file.sav";
+    private static final String FILENAME = "file.sav";
     // New ListView for log
-    public ListView oldFuelLog;
+    private ListView oldFuelLog;
     // Create fuel log
-    public ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
+    //private FuelLog log= new FuelLog();
+    private ArrayList<FuelLogEntry> log = new ArrayList<FuelLogEntry>();
     // Adapter used for displaying the ListView items
-    public ArrayAdapter<FuelLogEntry> adapter;
+    private ArrayAdapter<FuelLogEntry> adapter;
 
     // Text displayed when user presses "Calculate Total Fuel Cost" button
     TextView addResult;
@@ -79,6 +80,7 @@ public class FuelLogActivity extends Activity implements Serializable {
 
                 setResult(RESULT_OK);
                 log.clear(); // Remove all fuel log entries from log
+                //log.clearLog();
                 adapter.notifyDataSetChanged(); // Update adapter
                 saveInFile(); // Update file.save
 
