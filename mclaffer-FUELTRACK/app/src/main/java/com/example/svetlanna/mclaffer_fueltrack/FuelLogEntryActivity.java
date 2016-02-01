@@ -35,8 +35,7 @@ public class FuelLogEntryActivity extends Activity implements Serializable {
     private EditText fuel_unit_cost;
 
     // Used as a flag to determine whether entry is new or to be edited
-    public String flag = "edit";
-
+    private String flag = "edit";
 
     // Only called once per activity lifetime
     @Override

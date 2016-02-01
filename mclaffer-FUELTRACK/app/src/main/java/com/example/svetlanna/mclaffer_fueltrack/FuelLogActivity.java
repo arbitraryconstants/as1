@@ -54,7 +54,7 @@ public class FuelLogActivity extends Activity implements Serializable {
     FuelLogEntry entry;
 
     // Code for intent
-    public int CODE = 1;
+    private int CODE = 1;
 
     // Only called once per activity lifetime
     @Override
